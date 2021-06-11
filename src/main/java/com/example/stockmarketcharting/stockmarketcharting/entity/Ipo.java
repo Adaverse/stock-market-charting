@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Ipo {
@@ -29,10 +33,10 @@ public class Ipo {
     @Column(nullable = false)
     private String remarks;
     
-    @OneToOne(mappedBy="ipo")
+    @OneToOne(mappedBy="ipo", fetch=FetchType.LAZY)
     private Company company;
     
-    @ManyToMany(mappedBy="ipo")
+    @ManyToMany(mappedBy="ipo", fetch=FetchType.LAZY)
     private List<StockExchange> stockExchanges = new ArrayList<>();
 
 	public float getPricePerShare() {
@@ -71,6 +75,7 @@ public class Ipo {
 		return id;
 	}
 
+	@JsonManagedReference
 	public Company getCompany() {
 		return company;
 	}
@@ -79,6 +84,7 @@ public class Ipo {
 		this.company = company;
 	}
 
+	@JsonManagedReference
 	public List<StockExchange> getStockExchanges() {
 		return stockExchanges;
 	}

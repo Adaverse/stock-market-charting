@@ -14,6 +14,8 @@ import com.example.stockmarketcharting.stockmarketcharting.entity.Sector;
 import com.example.stockmarketcharting.stockmarketcharting.entity.StockExchange;
 import com.example.stockmarketcharting.stockmarketcharting.entity.StockPrice;
 import com.example.stockmarketcharting.stockmarketcharting.entity.Company;
+import com.example.stockmarketcharting.stockmarketcharting.entity.CompanyCode;
+import com.example.stockmarketcharting.stockmarketcharting.repository.CompanyCodeRepository;
 import com.example.stockmarketcharting.stockmarketcharting.repository.CompanyRepository;
 import com.example.stockmarketcharting.stockmarketcharting.repository.IpoRespository;
 import com.example.stockmarketcharting.stockmarketcharting.repository.SectorRepository;
@@ -40,6 +42,9 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 	
 	@Autowired
 	CompanyRepository companyRepository;
+	
+	@Autowired
+	CompanyCodeRepository companyCodeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(StockMarketChartingApplication.class, args);
@@ -73,6 +78,11 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		
 		stockExchange.addIpo(ipo);
 		stockExchangeRepository.save(stockExchange);
+		
+		CompanyCode companyCode = new CompanyCode(500101);
+		companyCode.setCompany(company);
+		companyCode.setStockExchange(stockExchange);
+		companyCodeRepository.save(companyCode);
 	}
 
 }

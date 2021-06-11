@@ -5,10 +5,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class StockExchange {
@@ -32,11 +37,14 @@ public class StockExchange {
     @ManyToMany
     private List<Ipo> ipo = new ArrayList<>();
     
-    @ManyToMany(mappedBy = "stockExchanges")
+    @ManyToMany(mappedBy = "stockExchanges", fetch=FetchType.LAZY)
     private List<Company> companies = new ArrayList<>();
     
-    @OneToMany(mappedBy = "stockExchange")
+    @OneToMany(mappedBy = "stockExchange", fetch=FetchType.LAZY)
     private List<StockPrice> stockPrices = new ArrayList<>();
+    
+    @OneToOne(mappedBy = "stockExchange")
+    private CompanyCode companyCode;
 
 	public String getStockExchangeName() {
 		return stockExchangeName;
@@ -74,6 +82,7 @@ public class StockExchange {
 		return id;
 	}
 
+	@JsonBackReference
 	public List<Ipo> getIpo() {
 		return ipo;
 	}
@@ -82,6 +91,7 @@ public class StockExchange {
 		this.ipo.add(ipo);
 	}
 
+	@JsonManagedReference
 	public List<Company> getCompanies() {
 		return companies;
 	}
@@ -90,12 +100,22 @@ public class StockExchange {
 		this.companies.add(company);
 	}
 
+	@JsonManagedReference
 	public List<StockPrice> getStockPrices() {
 		return stockPrices;
 	}
 
 	public void addStockPrice(StockPrice stockPrice) {
 		this.stockPrices.add(stockPrice);
+	}
+
+	@JsonManagedReference
+	public CompanyCode getCompanyCode() {
+		return companyCode;
+	}
+
+	public void setCompanyCode(CompanyCode companyCode) {
+		this.companyCode = companyCode;
 	}
 
 	public StockExchange(String stockExchangeName, String brief, String address, String remarks) {

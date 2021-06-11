@@ -5,11 +5,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Company {
@@ -36,11 +40,14 @@ public class Company {
     @ManyToMany
     private List<StockExchange> stockExchanges = new ArrayList<>();
     
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", fetch=FetchType.LAZY)
     private List<StockPrice> stockPrices = new ArrayList<>();
   
     @OneToOne
     private Sector sector;
+    
+    @OneToMany(mappedBy = "company", fetch=FetchType.LAZY)
+    private List<CompanyCode> companyCodes = new ArrayList<>();
 
 	public Company(float turnOver, String ceo, String boardDirectors, String briefWriteup, Ipo ipo,
 			List<StockExchange> stockExchanges, List<StockPrice> stockPrices, Sector sector) {
@@ -104,6 +111,7 @@ public class Company {
 		return id;
 	}
 
+	@JsonBackReference
 	public List<StockExchange> getStockExchanges() {
 		return stockExchanges;
 	}
@@ -112,6 +120,7 @@ public class Company {
 		this.stockExchanges.add(stockExchange);
 	}
 
+	@JsonManagedReference
 	public List<StockPrice> getStockPrices() {
 		return stockPrices;
 	}
@@ -120,6 +129,7 @@ public class Company {
 		this.stockPrices.add(stockPrice);
 	}
 
+	@JsonBackReference
 	public Ipo getIpo() {
 		return ipo;
 	}
@@ -128,12 +138,22 @@ public class Company {
 		this.ipo = ipo;
 	}
 
+	@JsonBackReference
 	public Sector getSector() {
 		return sector;
 	}
 
 	public void setSector(Sector sector) {
 		this.sector = sector;
+	}
+
+	@JsonManagedReference
+	public List<CompanyCode> getCompanyCode() {
+		return companyCodes;
+	}
+	
+	public void addCompanyCode (CompanyCode companyCode) {
+		this.companyCodes.add(companyCode);
 	}
 
 	@Override

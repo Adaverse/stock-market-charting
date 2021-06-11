@@ -31,7 +31,7 @@ public class CompanyService {
 		existingCompany.setTurnOver(company.getTurnOver());
 		existingCompany.setCeo(company.getCeo());
 		existingCompany.setBoardDirectors(company.getBoardDirectors());
-		existingCompany.setSector(company.getSector());
+//		existingCompany.setSector(company.getSector());
 		existingCompany.setBriefWriteup(company.getBriefWriteup());
 		return repository.save(existingCompany);
 	}

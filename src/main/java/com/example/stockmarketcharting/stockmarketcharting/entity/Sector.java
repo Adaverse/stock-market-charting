@@ -2,9 +2,12 @@ package com.example.stockmarketcharting.stockmarketcharting.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Sector {
@@ -19,7 +22,7 @@ public class Sector {
     @Column(nullable = false)
     private String brief;
     
-    @OneToOne(mappedBy = "sector")
+    @OneToOne(mappedBy = "sector", fetch=FetchType.LAZY)
     private Company company;
     
     public String getSectorName() {
@@ -42,6 +45,7 @@ public class Sector {
 		return id;
 	}
 
+	@JsonManagedReference
 	public Company getCompany() {
 		return company;
 	}
