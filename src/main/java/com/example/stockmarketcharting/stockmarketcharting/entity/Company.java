@@ -42,15 +42,25 @@ public class Company {
     @OneToOne
     private Sector sector;
 
-	public Company(int id, Long turnOver, String ceo, String boardDirectors, String briefWriteup,
-			Ipo ipo) {
+	public Company(float turnOver, String ceo, String boardDirectors, String briefWriteup, Ipo ipo,
+			List<StockExchange> stockExchanges, List<StockPrice> stockPrices, Sector sector) {
 		super();
-		this.id = id;
 		this.turnOver = turnOver;
 		this.ceo = ceo;
 		this.boardDirectors = boardDirectors;
 		this.briefWriteup = briefWriteup;
 		this.ipo = ipo;
+		this.stockExchanges = stockExchanges;
+		this.stockPrices = stockPrices;
+		this.sector = sector;
+	}
+
+	public Company(float turnOver, String ceo, String boardDirectors, String briefWriteup) {
+		super();
+		this.turnOver = turnOver;
+		this.ceo = ceo;
+		this.boardDirectors = boardDirectors;
+		this.briefWriteup = briefWriteup;
 	}
 
 	public Company() {

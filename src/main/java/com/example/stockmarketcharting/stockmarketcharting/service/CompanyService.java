@@ -1,5 +1,7 @@
 package com.example.stockmarketcharting.stockmarketcharting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,14 @@ public class CompanyService {
 	public Company saveCompany(Company company) {
 		return repository.save(company);
 	}
+	
+	public List<Company> getCompanies() {
+		return repository.findAll();
+	}
+	
+	public Company findById( int id ) {
+		return repository.findById(id).orElse(null);
+	}
 
 	public Company updateCompany(Company company) {
 		Company existingCompany = repository.findById(company.getId()).orElse(null);
@@ -29,4 +39,5 @@ public class CompanyService {
 	public void deleteCompany(int id) {
 		repository.deleteById(id);
 	}
+
 }

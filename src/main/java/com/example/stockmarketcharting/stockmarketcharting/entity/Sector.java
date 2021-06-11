@@ -56,6 +56,13 @@ public class Sector {
 		this.brief = brief;
 	}
 
+	public Sector(String sectorName, String brief, Company company) {
+		super();
+		this.sectorName = sectorName;
+		this.brief = brief;
+		this.company = company;
+	}
+
 	public Sector() {
 		super();
 		// TODO Auto-generated constructor stub

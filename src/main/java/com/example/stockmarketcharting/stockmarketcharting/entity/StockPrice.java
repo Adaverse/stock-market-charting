@@ -81,6 +81,13 @@ public class StockPrice {
 		this.time = time;
 	}
 
+	public StockPrice(float stockPrice, String date, String time) {
+		super();
+		this.stockPrice = stockPrice;
+		this.date = date;
+		this.time = time;
+	}
+
 	public StockPrice() {
 		super();
 		// TODO Auto-generated constructor stub

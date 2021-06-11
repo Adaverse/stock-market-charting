@@ -83,8 +83,8 @@ public class Ipo {
 		return stockExchanges;
 	}
 	
-	public List<StockExchange> addStockExchange() {
-		return stockExchanges;
+	public void addStockExchange(StockExchange stockExchange) {
+		stockExchanges.add(stockExchange);
 	}
 
 	public Ipo(float pricePerShare, Long totalShares, String openDateTime, String remarks, Company company) {
@@ -94,6 +94,14 @@ public class Ipo {
 		this.openDateTime = openDateTime;
 		this.remarks = remarks;
 		this.company = company;
+	}
+
+	public Ipo(float pricePerShare, Long totalShares, String openDateTime, String remarks) {
+		super();
+		this.pricePerShare = pricePerShare;
+		this.totalShares = totalShares;
+		this.openDateTime = openDateTime;
+		this.remarks = remarks;
 	}
 
 	public Ipo() {
