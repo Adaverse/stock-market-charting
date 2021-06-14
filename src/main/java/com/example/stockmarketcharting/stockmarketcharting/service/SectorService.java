@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.stockmarketcharting.stockmarketcharting.repository.SectorRepository;
+import com.example.stockmarketcharting.stockmarketcharting.entity.Company;
 import com.example.stockmarketcharting.stockmarketcharting.entity.Sector;
 
+@Service
 public class SectorService {
 
 	@Autowired

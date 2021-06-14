@@ -81,6 +81,7 @@ public class StockPrice {
 		this.stockExchange = stockExchange;
 	}
 
+	@JsonBackReference(value = "stockPrice-companyCode")
 	public CompanyCode getCompanyCode() {
 		return companyCode;
 	}

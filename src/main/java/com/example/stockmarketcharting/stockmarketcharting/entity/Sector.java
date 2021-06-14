@@ -1,10 +1,14 @@
 package com.example.stockmarketcharting.stockmarketcharting.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,8 +26,8 @@ public class Sector {
     @Column(nullable = false)
     private String brief;
     
-    @OneToOne(mappedBy = "sector", fetch=FetchType.LAZY)
-    private Company company;
+    @OneToMany(mappedBy = "sector", fetch=FetchType.LAZY)
+    private List<Company> companies = new ArrayList<>();
     
     public String getSectorName() {
 		return sectorName;
@@ -46,12 +50,12 @@ public class Sector {
 	}
 
 	@JsonManagedReference(value = "company-sector")
-	public Company getCompany() {
-		return company;
+	public List<Company> getCompanies() {
+		return companies;
 	}
 
-	public void setCompany(Company company) {
-		this.company = company;
+	public void addCompany(Company company) {
+		this.companies.add(company);
 	}
 
 	public Sector(String sectorName, String brief) {
@@ -60,11 +64,11 @@ public class Sector {
 		this.brief = brief;
 	}
 
-	public Sector(String sectorName, String brief, Company company) {
+	public Sector(String sectorName, String brief, List<Company> companies) {
 		super();
 		this.sectorName = sectorName;
 		this.brief = brief;
-		this.company = company;
+		this.companies = companies;
 	}
 
 	public Sector() {

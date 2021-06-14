@@ -64,10 +64,17 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		stockPriceRepository.save(stockPrice);
 		
 		Ipo ipo = new Ipo((float)10, 100L, "20-2-2013, 9:15 AM", "High valued!");
+		Ipo ipo1 = new Ipo((float)100, 200L, "20-2-2021, 10:15 AM", "Mid valued!");
 		ipoRepository.save(ipo);
+		ipoRepository.save(ipo1);
 		
-		Company company = new Company((float)200000000, "Mahesh Singh", "Rahul Bisnoy, Ashu Bisig, Mahesh Singh", "It is working pretty well.", ipo, Arrays.asList(stockExchange), Arrays.asList(stockPrice), sector);
+		Company company = new Company("company1", (float)200000000, "Mahesh Singh", "Rahul Bisnoy, Ashu Bisig, Mahesh Singh", "It is working pretty well.", ipo, Arrays.asList(stockExchange), Arrays.asList(stockPrice), sector);
 		companyRepository.save(company);
+		
+		Company company1 = new Company("company2", (float)200000000, "Mahesh Singh1", "Rahul Bisnoy1, Ashu Bisig1, Mahesh Singh1", "It is working pretty well.1");
+		company1.setSector(sector);
+		company1.setIpo(ipo1);
+		companyRepository.save(company1);
 		
 //		stockPrice.setCompany(company);
 		

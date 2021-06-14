@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -16,12 +17,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Entity
+@Entity(name = "COMPANY")
 public class Company {
 
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	@Column(nullable = false)
+	private String companyName;
 	
     @Column(nullable = false)
     private float turnOver;
@@ -45,15 +49,16 @@ public class Company {
 //    @OneToMany(mappedBy = "company", fetch=FetchType.LAZY)
 //    private List<StockPrice> stockPrices = new ArrayList<>();
   
-    @OneToOne
+    @ManyToOne
     private Sector sector;
     
     @OneToMany(mappedBy = "company", fetch=FetchType.LAZY)
     private List<CompanyCode> companyCodes = new ArrayList<>();
 
-	public Company(float turnOver, String ceo, String boardDirectors, String briefWriteup, Ipo ipo,
+	public Company(String companyName, float turnOver, String ceo, String boardDirectors, String briefWriteup, Ipo ipo,
 			List<StockExchange> stockExchanges, List<StockPrice> stockPrices, Sector sector) {
 		super();
+		this.companyName = companyName;
 		this.turnOver = turnOver;
 		this.ceo = ceo;
 		this.boardDirectors = boardDirectors;
@@ -64,8 +69,9 @@ public class Company {
 		this.sector = sector;
 	}
 
-	public Company(float turnOver, String ceo, String boardDirectors, String briefWriteup) {
+	public Company(String companyName, float turnOver, String ceo, String boardDirectors, String briefWriteup) {
 		super();
+		this.companyName = companyName;
 		this.turnOver = turnOver;
 		this.ceo = ceo;
 		this.boardDirectors = boardDirectors;
@@ -75,6 +81,14 @@ public class Company {
 	public Company() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public float getTurnOver() {

@@ -39,4 +39,8 @@ public class CompanyService {
 	public void deleteCompany(int id) {
 		repository.deleteById(id);
 	}
+	
+	public List<Company> searchCompany(String searchString){
+		return repository.getCompanyBySearch(searchString);
+	}
 }
