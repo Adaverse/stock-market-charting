@@ -24,7 +24,7 @@ public class Company {
 	@GeneratedValue
 	private int id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String companyName;
 	
     @Column(nullable = false)

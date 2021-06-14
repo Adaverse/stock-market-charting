@@ -15,4 +15,13 @@ public class UserService {
 	public User saveUser(User user) {
 		return repository.save(user);
 	}
+	
+	public boolean isEmailUnique(String email) {
+		User user = repository.findByEmail(email);
+		if(user != null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }
