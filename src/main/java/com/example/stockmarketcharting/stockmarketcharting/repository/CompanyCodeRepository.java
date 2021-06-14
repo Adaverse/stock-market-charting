@@ -6,4 +6,6 @@ import com.example.stockmarketcharting.stockmarketcharting.entity.CompanyCode;
 
 public interface CompanyCodeRepository extends JpaRepository<CompanyCode, Integer>{
 
+	CompanyCode findByCompanyCode(int companyCode);
+	
 }

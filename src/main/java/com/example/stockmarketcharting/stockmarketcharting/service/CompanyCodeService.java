@@ -16,4 +16,8 @@ public class CompanyCodeService {
 		return repository.save(companyCode);
 	}
 	
+	public CompanyCode findByCompanyCode(int companyCode) {
+		return repository.findByCompanyCode(companyCode);
+	}
+	
 }

@@ -69,8 +69,7 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		Company company = new Company((float)200000000, "Mahesh Singh", "Rahul Bisnoy, Ashu Bisig, Mahesh Singh", "It is working pretty well.", ipo, Arrays.asList(stockExchange), Arrays.asList(stockPrice), sector);
 		companyRepository.save(company);
 		
-		stockPrice.setCompany(company);
-		stockPriceRepository.save(stockPrice);
+//		stockPrice.setCompany(company);
 		
 //		ipo.addStockExchange(stockExchange);
 //		ipoRepository.save(ipo);
@@ -83,6 +82,10 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		companyCode.setCompany(company);
 		companyCode.setStockExchange(stockExchange);
 		companyCodeRepository.save(companyCode);
+		
+		stockPrice.setCompanyCode(companyCode);
+		stockPriceRepository.save(stockPrice);
+
 	}
 
 }

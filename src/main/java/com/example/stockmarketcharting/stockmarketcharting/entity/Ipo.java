@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -36,6 +37,7 @@ public class Ipo {
     @OneToOne(mappedBy="ipo", fetch=FetchType.LAZY)
     private Company company;
     
+    @JsonIgnore
     @ManyToMany(mappedBy="ipo", fetch=FetchType.LAZY)
     private List<StockExchange> stockExchanges = new ArrayList<>();
 
@@ -75,7 +77,7 @@ public class Ipo {
 		return id;
 	}
 
-	@JsonManagedReference
+	@JsonManagedReference(value = "company-ipo")
 	public Company getCompany() {
 		return company;
 	}
@@ -84,7 +86,7 @@ public class Ipo {
 		this.company = company;
 	}
 
-	@JsonManagedReference
+//	@JsonManagedReference(value = "stockExchange-ipo")
 	public List<StockExchange> getStockExchanges() {
 		return stockExchanges;
 	}
@@ -118,7 +120,7 @@ public class Ipo {
 	@Override
 	public String toString() {
 		return "Ipo [id=" + id + ", pricePerShare=" + pricePerShare + ", totalShares=" + totalShares + ", openDateTime="
-				+ openDateTime + ", remarks=" + remarks + ", company=" + company + "]";
+				+ openDateTime + ", remarks=" + remarks + "]";
 	}
     
 }

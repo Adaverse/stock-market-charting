@@ -45,7 +45,7 @@ public class Sector {
 		return id;
 	}
 
-	@JsonManagedReference
+	@JsonManagedReference(value = "company-sector")
 	public Company getCompany() {
 		return company;
 	}

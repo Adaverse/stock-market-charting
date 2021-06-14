@@ -16,4 +16,8 @@ public class StockExchangeService {
 		return repository.save(stockExchange);
 	}
 	
+	public StockExchange getByStockExchangeName (String stockExchangeName) {
+		return repository.findByStockExchangeName(stockExchangeName);
+	}
+	
 }

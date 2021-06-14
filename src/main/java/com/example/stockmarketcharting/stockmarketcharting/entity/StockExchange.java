@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -34,9 +35,11 @@ public class StockExchange {
     @Column()
     private String remarks;
     
+    @JsonIgnore
     @ManyToMany
     private List<Ipo> ipo = new ArrayList<>();
     
+    @JsonIgnore
     @ManyToMany(mappedBy = "stockExchanges", fetch=FetchType.LAZY)
     private List<Company> companies = new ArrayList<>();
     
@@ -82,7 +85,7 @@ public class StockExchange {
 		return id;
 	}
 
-	@JsonBackReference
+//	@JsonBackReference(value = "stockExchange-ipo")
 	public List<Ipo> getIpo() {
 		return ipo;
 	}
@@ -91,7 +94,7 @@ public class StockExchange {
 		this.ipo.add(ipo);
 	}
 
-	@JsonManagedReference
+//	@JsonBackReference(value = "company-stockExchange")
 	public List<Company> getCompanies() {
 		return companies;
 	}
@@ -100,7 +103,7 @@ public class StockExchange {
 		this.companies.add(company);
 	}
 
-	@JsonManagedReference
+	@JsonManagedReference(value = "stockPrice-stockExchange")
 	public List<StockPrice> getStockPrices() {
 		return stockPrices;
 	}
@@ -109,7 +112,7 @@ public class StockExchange {
 		this.stockPrices.add(stockPrice);
 	}
 
-	@JsonManagedReference
+	@JsonManagedReference(value = "companyCode-stockExchange")
 	public CompanyCode getCompanyCode() {
 		return companyCode;
 	}
