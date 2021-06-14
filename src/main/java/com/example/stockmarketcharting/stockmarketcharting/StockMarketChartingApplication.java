@@ -59,6 +59,9 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		StockExchange stockExchange = new StockExchange("BSE", "Primary", "7th Street, near New Mall, Bombay", "Very Important");
 		stockExchangeRepository.save(stockExchange);
 		
+		StockExchange stockExchange1 = new StockExchange("NSE", "Primary", "8th Street, near New Mall, Bombay", "Very Critical");
+		stockExchangeRepository.save(stockExchange1);
+		
 		StockPrice stockPrice = new StockPrice((float)20.12, "20-2-12", "8:13 AM");
 		stockPrice.setStockExchange(stockExchange);
 		stockPriceRepository.save(stockPrice);
@@ -72,6 +75,8 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		companyRepository.save(company);
 		
 		Company company1 = new Company("company2", (float)200000000, "Mahesh Singh1", "Rahul Bisnoy1, Ashu Bisig1, Mahesh Singh1", "It is working pretty well.1");
+		company1.addStockExchange(stockExchange1);
+		company1.addStockExchange(stockExchange);
 		company1.setSector(sector);
 		company1.setIpo(ipo1);
 		companyRepository.save(company1);

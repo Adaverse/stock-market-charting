@@ -1,5 +1,7 @@
 package com.example.stockmarketcharting.stockmarketcharting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,14 @@ public class StockExchangeService {
 	
 	public StockExchange getByStockExchangeName (String stockExchangeName) {
 		return repository.findByStockExchangeName(stockExchangeName);
+	}
+	
+	public List<StockExchange> getAllStockExchanges () {
+		return repository.findAll();
+	}
+	
+	public StockExchange findById(int id) {
+		return repository.findById(id).orElse(null);
 	}
 	
 }

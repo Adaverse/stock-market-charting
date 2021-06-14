@@ -43,7 +43,7 @@ public class CompanyController {
 	public Ipo getIpoFromCompany(@PathVariable int id) {
 		Company company = service.findById(id);
 		return company.getIpo();
-	}
+	}	
 	
 	@GetMapping("/searchCompany/{searchString}")
 	public List<Company> searchCompany(@PathVariable String searchString) {
