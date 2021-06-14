@@ -1,5 +1,7 @@
 package com.example.stockmarketcharting.stockmarketcharting.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +10,7 @@ import com.example.stockmarketcharting.stockmarketcharting.repository.UserReposi
 
 @Service
 public class UserService {
-
+	
 	@Autowired
 	UserRepository repository;
 	
@@ -18,6 +20,24 @@ public class UserService {
 	
 	public boolean isEmailUnique(String email) {
 		User user = repository.findByEmail(email);
+		if(user != null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean isUsernameUnique(String username) {
+		User user = repository.findByUsername(username);
+		if(user != null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean isMobileNumberUnique(Long mobileNumber) {
+		User user = repository.findByMobileNumber(mobileNumber);
 		if(user != null) {
 			return false;
 		} else {

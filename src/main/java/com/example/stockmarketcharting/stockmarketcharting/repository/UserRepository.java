@@ -7,5 +7,6 @@ import com.example.stockmarketcharting.stockmarketcharting.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	User findByEmail(String email);
-	
+	User findByUsername(String username);
+	User findByMobileNumber(Long mobileNumber);
 }

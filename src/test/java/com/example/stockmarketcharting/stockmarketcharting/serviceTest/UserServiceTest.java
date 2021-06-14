@@ -39,4 +39,17 @@ public class UserServiceTest {
 		assertTrue(result1);
 	}
 	
+	// redundant test
+	@Test
+	public void testIsUsernameUnique() {
+		User user = new User("abc@gmail.com", "username", "password", 9437124067L, false);
+		Mockito.when(userRepository.findByUsername("username")).thenReturn(user);
+		
+		boolean result = userService.isUsernameUnique("username");
+		assertFalse(result);
+		
+		boolean result1 = userService.isUsernameUnique("username1");
+		assertTrue(result1);
+	}
+	
 }

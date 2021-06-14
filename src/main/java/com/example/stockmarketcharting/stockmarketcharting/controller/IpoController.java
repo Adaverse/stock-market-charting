@@ -27,7 +27,7 @@ public class IpoController {
 	public Response addIpo(@RequestBody Ipo ipo) {
 	    HashMap<String, String> map = new HashMap<>();
 	    
-	    return new Response("ok", "ok");
+	    return new Response(true, "ok");
 //		return service.saveIpo(ipo);
 	}
 	
