@@ -1,5 +1,7 @@
 package com.example.stockmarketcharting.stockmarketcharting.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +12,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity
+@Entity(name = "STOCK_PRICE")
 public class StockPrice {
 
 	@Id
@@ -27,12 +29,9 @@ public class StockPrice {
 	private float stockPrice;
 	
 	@Column(nullable = false)
-	private String date;
+	private Date date;
 	
-	@Column(nullable = false)
-	private String time;
-	
-	@OneToOne
+	@ManyToOne
 	private CompanyCode companyCode;
 
 	public float getStockPrice() {
@@ -43,20 +42,12 @@ public class StockPrice {
 		this.stockPrice = stockPrice;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
 	}
 
 	public int getId() {
@@ -90,20 +81,18 @@ public class StockPrice {
 		this.companyCode = companyCode;
 	}
 
-	public StockPrice(float stockPrice, String date, String time) {
+	public StockPrice(float stockPrice, Date date) {
 		super();
 		this.stockPrice = stockPrice;
 		this.date = date;
-		this.time = time;
 	}
 
-	public StockPrice(Company company, StockExchange stockExchange, float stockPrice, String date, String time,
+	public StockPrice(Company company, StockExchange stockExchange, float stockPrice, Date date, String time,
 			CompanyCode companyCode) {
 		super();
 		this.stockExchange = stockExchange;
 		this.stockPrice = stockPrice;
 		this.date = date;
-		this.time = time;
 		this.companyCode = companyCode;
 	}
 
@@ -114,8 +103,8 @@ public class StockPrice {
 
 	@Override
 	public String toString() {
-		return "StockPrice [id=" + id + ", stockExchange=" + stockExchange + ", stockPrice=" + stockPrice + ", date="
-				+ date + ", time=" + time + ", companyCode=" + companyCode + "]";
+		return "StockPrice [id=" + id  + ", stockPrice=" + stockPrice + ", date="
+				+ date + "]";
 	}
 
 }

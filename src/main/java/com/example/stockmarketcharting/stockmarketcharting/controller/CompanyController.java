@@ -1,5 +1,6 @@
 package com.example.stockmarketcharting.stockmarketcharting.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.stockmarketcharting.stockmarketcharting.entity.Company;
 import com.example.stockmarketcharting.stockmarketcharting.entity.Ipo;
+import com.example.stockmarketcharting.stockmarketcharting.entity.StockPrice;
 import com.example.stockmarketcharting.stockmarketcharting.response.Response;
 import com.example.stockmarketcharting.stockmarketcharting.service.CompanyService;
 
@@ -55,5 +57,4 @@ public class CompanyController {
 	public List<Company> searchCompany(@PathVariable String searchString) {
 		return service.searchCompany(searchString);
 	}
-	
 }

@@ -1,5 +1,6 @@
 package com.example.stockmarketcharting.stockmarketcharting;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.slf4j.Logger;
@@ -27,6 +28,8 @@ import com.example.stockmarketcharting.stockmarketcharting.repository.StockPrice
 public class StockMarketChartingApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY hh:mm:ss");
 	
 	@Autowired
 	SectorRepository sectorRespository;
@@ -62,16 +65,36 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		StockExchange stockExchange1 = new StockExchange("NSE", "Primary", "8th Street, near New Mall, Bombay", "Very Critical");
 		stockExchangeRepository.save(stockExchange1);
 		
-		StockPrice stockPrice = new StockPrice((float)20.12, "20-2-12", "8:13 AM");
+		StockPrice stockPrice = new StockPrice((float)20.12, sdf.parse("20-02-2012 10:30:00"));
 		stockPrice.setStockExchange(stockExchange);
 		stockPriceRepository.save(stockPrice);
+		
+		StockPrice stockPrice1 = new StockPrice((float)20.12, sdf.parse("20-02-2012 10:31:00"));
+		stockPrice1.setStockExchange(stockExchange);
+		stockPriceRepository.save(stockPrice1);
+		
+		StockPrice stockPrice2 = new StockPrice((float)20.12, sdf.parse("21-02-2012 10:31:00"));
+		stockPrice2.setStockExchange(stockExchange);
+		stockPriceRepository.save(stockPrice2);
+		
+		StockPrice stockPrice3 = new StockPrice((float)20.12, sdf.parse("22-02-2013 10:31:00"));
+		stockPrice3.setStockExchange(stockExchange);
+		stockPriceRepository.save(stockPrice3);
+		
+		StockPrice stockPrice4 = new StockPrice((float)20.12, sdf.parse("22-02-2014 10:31:00"));
+		stockPrice4.setStockExchange(stockExchange);
+		stockPriceRepository.save(stockPrice4);
+		
+		StockPrice stockPrice5 = new StockPrice((float)20.12, sdf.parse("22-02-2015 10:31:00"));
+		stockPrice5.setStockExchange(stockExchange);
+		stockPriceRepository.save(stockPrice5);
 		
 		Ipo ipo = new Ipo((float)10, 100L, "20-2-2013, 9:15 AM", "High valued!");
 		Ipo ipo1 = new Ipo((float)100, 200L, "20-2-2021, 10:15 AM", "Mid valued!");
 		ipoRepository.save(ipo);
 		ipoRepository.save(ipo1);
 		
-		Company company = new Company("company1", (float)200000000, "Mahesh Singh", "Rahul Bisnoy, Ashu Bisig, Mahesh Singh", "It is working pretty well.", ipo, Arrays.asList(stockExchange), Arrays.asList(stockPrice), sector);
+		Company company = new Company("company1", (float)200000000, "Mahesh Singh", "Rahul Bisnoy, Ashu Bisig, Mahesh Singh", "It is working pretty well.", ipo, Arrays.asList(stockExchange), sector);
 		companyRepository.save(company);
 		
 		Company company1 = new Company("company2", (float)200000000, "Mahesh Singh1", "Rahul Bisnoy1, Ashu Bisig1, Mahesh Singh1", "It is working pretty well.1");
@@ -95,9 +118,28 @@ public class StockMarketChartingApplication implements CommandLineRunner {
 		companyCode.setStockExchange(stockExchange);
 		companyCodeRepository.save(companyCode);
 		
+		CompanyCode companyCode1 = new CompanyCode(500102);
+		companyCode1.setCompany(company1);
+		companyCode1.setStockExchange(stockExchange);
+		companyCodeRepository.save(companyCode1);
+		
+		stockPrice5.setCompanyCode(companyCode);
+		stockPriceRepository.save(stockPrice5);
+		
 		stockPrice.setCompanyCode(companyCode);
 		stockPriceRepository.save(stockPrice);
-
+		
+		stockPrice1.setCompanyCode(companyCode);
+		stockPriceRepository.save(stockPrice1);
+		
+		stockPrice2.setCompanyCode(companyCode1);
+		stockPriceRepository.save(stockPrice2);
+		
+		stockPrice3.setCompanyCode(companyCode);
+		stockPriceRepository.save(stockPrice3);
+		
+		stockPrice4.setCompanyCode(companyCode);
+		stockPriceRepository.save(stockPrice4);
 	}
 
 }

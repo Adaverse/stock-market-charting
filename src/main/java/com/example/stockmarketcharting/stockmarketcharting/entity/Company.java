@@ -56,7 +56,7 @@ public class Company {
     private List<CompanyCode> companyCodes = new ArrayList<>();
 
 	public Company(String companyName, float turnOver, String ceo, String boardDirectors, String briefWriteup, Ipo ipo,
-			List<StockExchange> stockExchanges, List<StockPrice> stockPrices, Sector sector) {
+			List<StockExchange> stockExchanges, Sector sector) {
 		super();
 		this.companyName = companyName;
 		this.turnOver = turnOver;
