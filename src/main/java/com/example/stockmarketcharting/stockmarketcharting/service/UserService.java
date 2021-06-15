@@ -14,6 +14,10 @@ public class UserService {
 	@Autowired
 	UserRepository repository;
 	
+	public User findById(int id) {
+		return repository.findById(id).orElse(null);
+	}
+	
 	public User saveUser(User user) {
 		return repository.save(user);
 	}

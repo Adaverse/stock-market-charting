@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.stockmarketcharting.stockmarketcharting.entity.Company;
 import com.example.stockmarketcharting.stockmarketcharting.entity.Ipo;
+import com.example.stockmarketcharting.stockmarketcharting.response.Response;
 import com.example.stockmarketcharting.stockmarketcharting.service.CompanyService;
 
 @RestController
@@ -25,8 +26,13 @@ public class CompanyController {
 	CompanyService service;
 	
 	@PostMapping("/addCompany")
-	public Company addCompany(@RequestBody Company company) {
-		return service.saveCompany(company);
+	public Response addCompany(@RequestBody Company company) {
+		boolean uniqueCompanyName = service.isCompanyNameUnique(company.getCompanyName());
+		if(!uniqueCompanyName) {
+			return new Response(false, "This company already exists!");
+		} else {
+			return new Response(true, "Successfully saved!");
+		}
 	}
 	
 	@PutMapping("/updateCompany")

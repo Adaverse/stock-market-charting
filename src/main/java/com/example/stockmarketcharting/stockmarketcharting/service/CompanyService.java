@@ -43,4 +43,13 @@ public class CompanyService {
 	public List<Company> searchCompany(String searchString){
 		return repository.getCompanyBySearch(searchString);
 	}
+	
+	public boolean isCompanyNameUnique(String companyName) {
+		Company company = repository.findByCompanyName(companyName);
+		if(company != null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }
