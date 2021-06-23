@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import com.example.stockmarketcharting.stockmarketcharting.response.Response;
 import com.example.stockmarketcharting.stockmarketcharting.service.UserService;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UserController {
 	
 	@Autowired

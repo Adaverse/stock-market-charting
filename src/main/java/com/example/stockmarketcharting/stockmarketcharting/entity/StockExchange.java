@@ -120,6 +120,11 @@ public class StockExchange {
 	public void addCompanyCode(CompanyCode companyCode) {
 		this.companyCode.add(companyCode);
 	}
+	
+	public StockExchange(String stockExchangeName) {
+		super();
+		this.stockExchangeName = stockExchangeName;
+	}
 
 	public StockExchange(String stockExchangeName, String brief, String address, String remarks) {
 		super();

@@ -8,6 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import com.example.stockmarketcharting.stockmarketcharting.service.StockExchange
 import com.example.stockmarketcharting.stockmarketcharting.service.StockPriceService;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class StockPriceController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -41,13 +43,13 @@ public class StockPriceController {
 	@PostMapping("/addStockPrice")
 	public String addStockPrice(@RequestBody List<StockPrice> stockPrice) {
 		int _companyCode;
-		CompanyCode companyCode;
-		StockExchange stockExchange;
+//		 CompanyCode companyCode;
+//		StockExchange stockExchange;
 		for(StockPrice _stockPrice : stockPrice) {
 			_companyCode = _stockPrice.getCompanyCode().getCompanyCode();
-			companyCode = companyCodeService.findByCompanyCode(_companyCode);
+			CompanyCode companyCode = companyCodeService.findByCompanyCode(_companyCode);
 			_stockPrice.setCompanyCode(companyCode);
-			stockExchange = stockExchangeService.getByStockExchangeName(_stockPrice.getStockExchange().getStockExchangeName());
+			StockExchange stockExchange = stockExchangeService.getByStockExchangeName(_stockPrice.getStockExchange().getStockExchangeName());
 			_stockPrice.setStockExchange(stockExchange);
 			stockPriceService.saveStockPrice(_stockPrice);
 		}

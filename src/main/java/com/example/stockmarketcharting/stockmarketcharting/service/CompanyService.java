@@ -32,6 +32,7 @@ public class CompanyService {
 		existingCompany.setCeo(company.getCeo());
 		existingCompany.setBoardDirectors(company.getBoardDirectors());
 //		existingCompany.setSector(company.getSector());
+		existingCompany.setCompanyName(company.getCompanyName());
 		existingCompany.setBriefWriteup(company.getBriefWriteup());
 		return repository.save(existingCompany);
 	}
@@ -52,4 +53,9 @@ public class CompanyService {
 			return true;
 		}
 	}
+
+	public Company getCompanyByName(String companyName) {
+		return repository.findByCompanyName(companyName);
+	}
+
 }

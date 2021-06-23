@@ -44,7 +44,7 @@ public class Company {
     
     @JsonIgnore
     @ManyToMany
-    private List<StockExchange> stockExchanges = new ArrayList<>();
+    private List<StockExchange> stockExchanges = new ArrayList<>(); 
     
 //    @OneToMany(mappedBy = "company", fetch=FetchType.LAZY)
 //    private List<StockPrice> stockPrices = new ArrayList<>();
@@ -76,6 +76,26 @@ public class Company {
 		this.ceo = ceo;
 		this.boardDirectors = boardDirectors;
 		this.briefWriteup = briefWriteup;
+	}
+	
+	public Company(String companyName, float turnOver, String ceo, String boardDirectors, String briefWriteup, Ipo ipo) {
+		super();
+		this.companyName = companyName;
+		this.turnOver = turnOver;
+		this.ceo = ceo;
+		this.boardDirectors = boardDirectors;
+		this.briefWriteup = briefWriteup;
+		this.ipo = ipo;
+	}
+	
+	public Company(String companyName, float turnOver, String ceo, String boardDirectors, String briefWriteup, List<StockExchange> stockExchanges) {
+		super();
+		this.companyName = companyName;
+		this.turnOver = turnOver;
+		this.ceo = ceo;
+		this.boardDirectors = boardDirectors;
+		this.briefWriteup = briefWriteup;
+		this.stockExchanges = stockExchanges;
 	}
 
 	public Company() {
@@ -111,7 +131,7 @@ public class Company {
 		return boardDirectors;
 	}
 
-	public void setBoardDirectors(String boardDirectors) {
+	public void setBoardDirectors(String boardDirectors) { 
 		this.boardDirectors = boardDirectors;
 	}
 
@@ -134,6 +154,10 @@ public class Company {
 	
 	public void addStockExchange(StockExchange stockExchange) {
 		this.stockExchanges.add(stockExchange);
+	}
+	
+	public void setStockExchange(List<StockExchange> stockExchanges) {
+		this.stockExchanges = stockExchanges;
 	}
 
 //	@JsonManagedReference(value = "stockPrice-company")
@@ -175,8 +199,7 @@ public class Company {
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", turnOver=" + turnOver + ", ceo=" + ceo + ", boardDirectors=" + boardDirectors
-				+ ", briefWriteup=" + briefWriteup + ", ipo=" + ipo + ", stockExchanges=" + stockExchanges + ", sector="
-				+ sector + ", companyCodes=" + companyCodes + "]";
+				+ ", briefWriteup=" + briefWriteup + " StockExhchange " + stockExchanges  + "]";
 	}
 	
 }
